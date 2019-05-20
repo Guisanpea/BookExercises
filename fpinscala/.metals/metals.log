@@ -1,9 +1,46 @@
-may 13, 2019 8:06:36 PM org.xnio.Xnio <clinit>
+may 20, 2019 8:03:05 PM org.xnio.Xnio <clinit>
 INFO: XNIO version 3.6.5.Final
-may 13, 2019 8:06:36 PM org.xnio.nio.NioXnio <clinit>
+may 20, 2019 8:03:05 PM org.xnio.nio.NioXnio <clinit>
 INFO: XNIO NIO Implementation Version 3.6.5.Final
-may 13, 2019 8:06:36 PM org.jboss.threads.Version <clinit>
+may 20, 2019 8:03:05 PM org.jboss.threads.Version <clinit>
 INFO: JBoss Threads version 2.3.0.Beta2
-should contain build.sbt. 
-INFO  Selected port 5031
-INFO  Started Metals http server at http://127.0.0.1:5031
+may 20, 2019 8:08:36 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 7
+may 20, 2019 8:08:46 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 16
+may 20, 2019 8:09:41 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 18
+may 20, 2019 8:10:37 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 21
+may 20, 2019 8:13:02 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 23
+may 20, 2019 8:13:24 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 29
+may 20, 2019 8:13:28 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 32
+may 20, 2019 8:14:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 34
+may 20, 2019 8:14:24 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 37
+may 20, 2019 8:14:40 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 39
+may 20, 2019 8:35:14 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 41
+may 20, 2019 8:38:49 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 44
+may 20, 2019 8:40:01 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 55
+may 20, 2019 8:40:36 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 67
+may 20, 2019 8:43:32 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 69
+may 20, 2019 8:44:26 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 75
+may 20, 2019 8:45:52 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 81
+may 20, 2019 8:50:17 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 83
+may 20, 2019 8:50:29 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 87
+may 20, 2019 8:50:44 PM org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+WARNING: Unmatched cancel notification for request id 90

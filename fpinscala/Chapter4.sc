@@ -34,9 +34,9 @@ object Option {
 
   def variance(xs: Seq[Double]): Option[Double] =
     mean(xs) flatMap { m =>
-        mean(xs map { x =>
-            math.pow(x - m, 2)
-        })
+      mean(xs map { x =>
+        math.pow(x - m, 2)
+      })
     }
   def lift[A,B](f: A => B): Option[A] => Option[B] = _ map f
 
@@ -60,11 +60,51 @@ object Option {
     case h :: t => map2(f(h), traverse1(t)(f))(_ :: _)
   }
 
-  def traverse1[A,B](as: List[A])(f: A => Option[B]): Option[List[B]] =
-    as.foldRight[Option[List[A]]]( Some(Nil) )( (h,t) => map2(f(h), t)(_ :: _) )
+  def traverse1fold[A,B](as: List[A])(f: A => Option[B]): Option[List[B]] =
+    as.foldRight[Option[List[B]]]( Some(Nil) )( (h,t) => map2(f(h), t)(_ :: _) )
 }
 
-sealed trait Either[+E, +A]
+sealed trait Either[+E, +A] {
+  def map[B](f: A => B): Either[E, B] = this match {
+    case Left(e) => Left(e)
+    case Right(a) => Right(f(a))
+  }
+
+  def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B] = this match {
+    case Left(e) => Left(e)
+    case Right(a) => f(a)
+  }
+
+  def orElse[EE >: E, B >: A](b: => Either[EE, B]): Either[EE, B] = this match {
+    case Left(e) => b
+    case Right(a) => Right(a)
+  }
+
+  def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] =
+    for {
+      aa <- this
+      bb <- b
+    } yield f(aa, bb)
+
+}
+
 case class Left[+E](value: E) extends Either[E, Nothing]
 case class Right[+A](value: A) extends Either[Nothing, A]
+
+object Either {
+  def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] = es match {
+    case Nil => Right(Nil)
+
+    case h :: t => for {
+      hh <- h
+      tt <- sequence(t)
+    } yield ( hh :: tt )
+      // h flatMap (hh => sequence(t) flatMap (tt => Right(hh :: tt)))
+  }
+
+  def traverse[E,A,B](es: List[A])(f: A => Either[E, B]): Either[E, List[A]] =
+    es.foldRight[Either[E,List[B]]](Right(Nil)){ (e, acc) =>
+      f(e).map2(acc)(_ :: _)
+    }
+}
 
