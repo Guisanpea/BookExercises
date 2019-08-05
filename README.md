@@ -1,1 +1,1 @@
-# Repo containing the solved exercises of books I've been reading
+# Repo containing the solved exercises of books or courses I've been reading or doing
