@@ -1,7 +1,7 @@
 sealed trait Option[+A] {
   def map[B](f: A => B): Option[B] = this match {
     case None => None
-    case Some(a) => Some( f(a) )
+    case Some(a) => Some(f(a))
   }
 
   def flatMap[B](f: A => Option[B]): Option[B] = this match {
@@ -21,16 +21,17 @@ sealed trait Option[+A] {
     this map (Some(_)) getOrElse ob
 
   def filter(pred: A => Boolean): Option[A] =
-    flatMap( a => if (pred(a)) Some(a) else None )
+    flatMap(a => if (pred(a)) Some(a) else None)
 }
 
 case class Some[+A](get: A) extends Option[A]
+
 case object None extends Option[Nothing]
 
 object Option {
   private def mean(xs: Seq[Double]): Option[Double] =
     if (xs.isEmpty) None
-    else Some(xs.sum /xs.length)
+    else Some(xs.sum / xs.length)
 
   def variance(xs: Seq[Double]): Option[Double] =
     mean(xs) flatMap { m =>
@@ -38,30 +39,30 @@ object Option {
         math.pow(x - m, 2)
       })
     }
-  def lift[A,B](f: A => B): Option[A] => Option[B] = _ map f
 
-  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A,B) => C): Option[C] =
+  def lift[A, B](f: A => B): Option[A] => Option[B] = _ map f
+
+  def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
     a flatMap (aa => b map (bb => f(aa, bb)))
 
   def sequence[A](as: List[Option[A]]): Option[List[A]] = as match {
     case Nil => Some(Nil)
-    case h :: t => h flatMap ( hh => sequence(t) map (hh :: _) )
+    case h :: t => h flatMap (hh => sequence(t) map (hh :: _))
   }
 
   def sequence1[A](as: List[Option[A]]): Option[List[A]] =
-    as.
-    foldRight[Option[List[A]]]( Some(Nil) )( (h, t) => map2(h, t)(_ :: _) )
+    as.foldRight[Option[List[A]]](Some(Nil))((h, t) => map2(h, t)(_ :: _))
 
-  def traverse[A,B](as: List[A])(f: A => Option[B]): Option[List[B]] =
+  def traverse[A, B](as: List[A])(f: A => Option[B]): Option[List[B]] =
     sequence(as map f)
 
-  def traverse1[A,B](as: List[A])(f: A => Option[B]): Option[List[B]] = as match {
+  def traverse1[A, B](as: List[A])(f: A => Option[B]): Option[List[B]] = as match {
     case Nil => Some(Nil)
     case h :: t => map2(f(h), traverse1(t)(f))(_ :: _)
   }
 
-  def traverse1fold[A,B](as: List[A])(f: A => Option[B]): Option[List[B]] =
-    as.foldRight[Option[List[B]]]( Some(Nil) )( (h,t) => map2(f(h), t)(_ :: _) )
+  def traverse1fold[A, B](as: List[A])(f: A => Option[B]): Option[List[B]] =
+    as.foldRight[Option[List[B]]](Some(Nil))((h, t) => map2(f(h), t)(_ :: _))
 }
 
 sealed trait Either[+E, +A] {
@@ -89,6 +90,7 @@ sealed trait Either[+E, +A] {
 }
 
 case class Left[+E](value: E) extends Either[E, Nothing]
+
 case class Right[+A](value: A) extends Either[Nothing, A]
 
 object Either {
@@ -98,12 +100,12 @@ object Either {
     case h :: t => for {
       hh <- h
       tt <- sequence(t)
-    } yield ( hh :: tt )
-      // h flatMap (hh => sequence(t) flatMap (tt => Right(hh :: tt)))
+    } yield hh :: tt
+    // h flatMap (hh => sequence(t) flatMap (tt => Right(hh :: tt)))
   }
 
-  def traverse[E,A,B](es: List[A])(f: A => Either[E, B]): Either[E, List[A]] =
-    es.foldRight[Either[E,List[B]]](Right(Nil)){ (e, acc) =>
+  def traverse[E, A, B](es: List[A])(f: A => Either[E, B]): Either[E, List[A]] =
+    es.foldRight[Either[E, List[B]]](Right(Nil)) { (e, acc) =>
       f(e).map2(acc)(_ :: _)
     }
 }
