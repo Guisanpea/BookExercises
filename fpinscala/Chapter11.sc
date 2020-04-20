@@ -32,6 +32,8 @@ trait Monad[F[_]] extends Functor[F] {
     else map2(ma, replicateM(n-1, ma))(_ :: _)
   }
 
+  def product[A,B](ma: F[A], mb: F[B]): F[(A, B)] = map2(ma, mb)((_, _))
+
   def filterM[A](ms: List[A])(f: A => F[Boolean]): F[List[A]] = ms match {
     case h :: t => flatMap(f(h))(
       if (_) map2(unit(h), filterM(t)(f))(_ :: _)

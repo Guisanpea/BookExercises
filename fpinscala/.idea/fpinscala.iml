@@ -7,5 +7,12 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-sdk-2.13.0" level="application" />
     <orderEntry type="library" name="scala-sdk-2.13.1-20191225-230744-unknown" level="application" />
+    <orderEntry type="library" name="scala-library-2.13.1.jar" level="project" />
+    <orderEntry type="library" name="scala-compiler-2.13.1.jar" level="project" />
+    <orderEntry type="library" name="scala-reflect-2.13.1.jar" level="project" />
+    <orderEntry type="library" name="scala-sdk-2.13.1" level="application" />
+    <orderEntry type="library" name="scala-library-2.13.1.jar" level="project" />
+    <orderEntry type="library" name="scala-compiler-2.13.1.jar" level="project" />
+    <orderEntry type="library" name="scala-reflect-2.13.1.jar" level="project" />
   </component>
 </module>
